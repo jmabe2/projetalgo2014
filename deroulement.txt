@@ -1,0 +1,15 @@
+Déroulement
+
+Menu
+
+1. Encodage de fichiers clients banque A+ tri
+2. Afficher les différents tableaux
+3. Création de fichiers clients A (source A, trinomA et trinumA)
+4. Afficher les différents fichiers
+
+5. Encodage de fichiers clients banque B
+6. Afficher le tableau
+7. Création de fichiers clients B (sourceB)
+8. Afficher le fichier client B
+
+9. Création et affichage des clients communs. 
