@@ -2,6 +2,7 @@
 #include<stdio.h>
 #define M 4
 #define P 4
+//ClientA
 struct clientA
 {
    int numero;
@@ -11,19 +12,19 @@ struct clientA
    char num_compte[20];
    char num_reg_nat[14];
 };
+struct clientA nouveauClientA;
+struct clientA sourceA[M];
+struct clientA trinumA[M];
+struct clientA trinomA[M];
+int tailleSourceA;
+//ClientB
 struct clientB
 {
   char nom[31];
   char prenom[31];
   char datenaiss[11];
 };
-int tailleSourceA;
-//ClientA
-struct clientA nouveauClientA;
-struct clientA sourceA[M];
-struct clientA trinumA[M];
-struct clientA trinomA[M];
-//ClientB
+int tailleSourceB;
 int tailleClientsCommuns;
 struct clientB sourceB[P];
 struct clientB clients_communs[0];
@@ -45,6 +46,7 @@ int verifnumcompte (char* chaine);
 int verifnom(char* chaine);
 //William
 void stringcopy (char* source, char* destination);
+
 //Fonction
 
 //Axel
@@ -54,12 +56,14 @@ int i;
 for (i=0;i<31;i++) 
     { 
        if (i==0&&chaine[i]<65||i==0&&chaine[i]>90) 
-       { 
-       return 0; 
+       {
+       	printf("pr%cnom incorrect !\n",130);
+        return 0; 
        } 
        else if (!(chaine[i]>=65&&chaine[i]<=90||chaine[i]==32||chaine[i]==45||chaine[i]==0||chaine[i]==10)) 
-       { 
-       return 0; 
+       {
+       	printf("pr%cnom incorrect !\n",130);
+        return 0; 
        } 
     } 
     return 1; 
@@ -67,43 +71,67 @@ for (i=0;i<31;i++)
 //Jean-michel
 int verifstrformat (char* format, char* chaine) 
 { 
- int i, res; 
- res = 1; 
+ int i;
  if (strlen(format) == strlen(chaine)) 
-{ 
+ { 
 	for (i=0;i<strlen(chaine);i++) 
 	{ 
 		switch(format[i]) 
 			{ 
 				case '#' : if ((chaine[i] < 48) || (chaine[i] > 57)) 
 				           { 
-							   res=0; 
-						   } 
-						   break; 
-			    default : if (chaine[i] != format[i]) 
-			               { 
-							   res=0; 
-						   } 
+				             printf("Valeur entr%ce incorrecte !\n",130);
+				             return 0;
+				           } 
+			                   break; 
+			        default : if (chaine[i] != format[i]) 
+			                  { 
+			                     printf("Valeur entr%ce incorrecte !\n",130);
+			                     return 0;
+				          }
+				          break;
 			} 
-		} 
-    } 
-    else 
-    { 
-		res=0; 
-    } 
-    return res; 
+        } 
+ } 
+ else 
+ {
+    printf("Valeur entr%ce incorrecte !\n",130);
+    return 0;
+ } 
+    return 1; 
 }
 int verifnumregnat (char* chaine) 
 { 
   return verifstrformat("######-###-##", chaine); 
 }  
- 
-
 int verifnumcompte (char* chaine) 
 { 
 	return verifstrformat("BE## #### #### ####", chaine); 
 }  
 //Patrick  
+//Fonction modifer par Manuel
+int verifnom(char* chaine)
+{
+ int i=0;
+ while (chaine[i] !='\0')
+ {
+  if((i==0)&&(chaine[i]<65||chaine[i]>90))
+  {
+   printf("Nom incorrect !\n");
+   return 0;
+  }
+                                         //Ou exclusif
+  else if((chaine[i]<65||chaine[i]>90)&&(chaine[i]==32^chaine[i]==0)==0)
+  {
+   printf("Nom incorrect !\n");
+   return 0;
+  }
+  i++;
+ }
+ return 1;
+}
+//Ta fonction ne fonctionnait pas
+/*
 int verifnom(char* chaine) 
 {  
   int i=0; 
@@ -131,6 +159,7 @@ while (chaine[i] !='\0' )
 }
 return printf("%d",j); 
 }
+*/
 //Manuel
 int verifdatenaiss(char *chaine)
 {
@@ -284,8 +313,6 @@ int compatibildatenaissregnat(char *datenaiss,char *num_reg_nat)
     if(num_reg_nat[i]!=datenaiss_temp[i])
     {
       printf("Date de naissance et num%cro de registre incompatible !\n",130);
-      system("pause");
-      system("cls");
       return 0;
     }
   }
