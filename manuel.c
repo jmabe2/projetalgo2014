@@ -164,7 +164,7 @@ return printf("%d",j);
 int verifdatenaiss(char *chaine)
 {
        int jour,mois,annee;
-       //On vérifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
+       //On vÃ©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
        int i;
     for(i=0;i<sizeof(nouveauClientA.datenaiss);i++)
     {
@@ -179,7 +179,7 @@ int verifdatenaiss(char *chaine)
          return 0;
        }
     }
-        //On converti chaque caractères en entier en soutrayant avec le caractere 0 '0'.
+        //On converti chaque caractÃ¨res en entier en soutrayant avec le caractere 0 '0'.
         jour = ((chaine[0]-'0')*10)+chaine[1]-'0' ;
         mois = ((chaine[3]-'0')*10)+chaine[4]-'0';
         annee = ((chaine[6]-'0')*1000)+((chaine[7]-'0')*100)+((chaine[8]-'0')*10)+chaine[9]-'0';
@@ -462,7 +462,7 @@ struct clientA encodenouvclientA()
 int getsPerso(char *destination,int size,char *fonctionverif)
 {
  fflush(stdin);
- //Retourn 0 si le nombre de caractères est dépassé
+ //Retourn 0 si le nombre de caractÃ¨res est dÃ©passÃ©
  int caracteres = 0,i;
  char lettre,temp[size];
  //Initialisation de la chaine temporaire
@@ -567,10 +567,116 @@ void banqueA()
       //Patrick doit faire la fonction
       //structclientAcopy(encodenouvclientA(),&sourceA[i]);
     }
+    system("cls");
+    //Affichage des différents tableau de la banqueA
+    /*int choix;
+    trinom();
+    trinum();
+    while(choix!=0)
+    {
+     if(tailleSourceA<=1)
+     {
+       printf("Afficher les clients 1)\n");
+       printf("Continuer            0)\n");
+       fflush(stdin);
+       printf("Votre choix : ");
+       scanf("%d",&choix);
+       switch(choix)
+       {
+        case 0 :system("cls");
+                break;
+        case 1 :system("cls");
+                afficherClientsA("");
+                break;
+        default : printf("Code incorrect !\n");
+                  system("pause");
+                  system("cls");
+               break; 
+       }
+     }
+     else
+     {
+         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possède plus de 1 client
+         printf("Afficher les clients                       1)\n");
+         printf("Afficher les clients par nom               2)\n");
+         printf("Afficher les clients par num%cro de client  3)\n",130);
+         printf("Continuer                                  0)\n");
+         printf("Votre choix : ");
+         fflush(stdin);
+         scanf("%d",&choix);
+         system("cls");
+         switch(choix)
+         {
+           case 0 : 
+                    break;
+           case 1 : afficherClientsA("");
+                    break;
+           case 2 : afficherClientsA("trinom");
+                    break;
+           case 3 : afficherClientsA("trinum");
+                    break;
+           default : printf("Code incorrect !\n");
+                     system("pause");
+                     system("cls");
+               break;
+           }
+     }
+    }
+    //Debut de l'écriture des fichiers de la banqueA
+     ecritureFichiersClientsA();
+    //Debut de la lecture et affichage des fichiers de la banqueA
+     lectureFichierClientsA();*/
+}
+void banqueB()
+{
+ //Debut du programme de la banqueB
+    int i;
+    system("cls");
+    printf("Encodage des clients de la banque B\n");
+    do
+    {
+     printf("Nombre de clients %c encoder : ",133);
+     fflush(stdin);
+     scanf("%d",&tailleSourceB);
+     if(tailleSourceB<=0)
+     {
+      printf("Nombre incorrect !\n");
+     }
+     else if(tailleSourceB>P)
+     {
+       printf("D%cpassement de la limite autoris%ce !\n",130,130);
+     }
+    }
+    while(tailleSourceB>P||tailleSourceB<=0);
+    //Debut de l'encodage de la banqueB
+    system("cls");
+    /*for(i=0;i<tailleSourceB;i++)
+    {
+      printf("Cient %d)\n",i+1);
+      structclientBcopy(encodenouvclientB(),&sourceB[i]);
+    }
+    //Affichage du tableau de la banqueB
+    afficherClientsB();
+    system("pause");
+    system("cls");
+    //Debut de l'écriture du fichier de la banqueB
+    ecrireFichier("banqueB","BanqueB.bin","");
+    //Debut de la lecture et affichage du fichier de la banqueB
+    if(lectureFichier("BanqueB.bin","banqueB","")==1)
+    {
+      printf("Lecture du fichier de la banqueB\n\n");
+      afficherClientsB();
+      system("pause");
+      system("cls");
+    }
+    //Recherche, affiche et écrit les client communs
+    clientsCommuns();
+    system("pause");
+    system("cls");*/
 }
 main()
 {
-  int choix=-1;
+int choix=-1;
      while(choix!=0)
      {
       printf("Encoder les clients 1)\n");
@@ -580,9 +686,36 @@ main()
       system("cls");
       switch(choix)
       {
-       case 1 :banqueA();
+       case 1 :
+            banqueA(); 
+            banqueB();
             break;
-       case 2 : printf("pas fait !!\n");
+       case 2 : /*
+            printf("Ordre de lecture des fichiers.\n");
+            printf("1)Fichiers de la banqueA.\n");
+            printf("2)Fichier de la banqueB.\n");
+            printf("3)Fichier des clients communs.\n\n");
+            system("pause");
+            system("cls");
+            lectureFichierClientsA();
+            if(lectureFichier("BanqueB.bin","banqueB","")==1)
+            {
+              afficherClientsB();
+            }
+            system("pause");
+            system("cls");
+            if(lectureFichier("BanqueBclients_communs.bin","banqueB","clients_communs")==1)
+            {
+              printf("Voici les clients communs.\n");
+              int i;
+              for(i=0;i<tailleClientsCommuns;i++)
+              {
+               afficherClientB(clients_communs[i]);
+             }
+            }
+            system("pause");
+            system("cls");*/
+            printf("pas encore fait !");
             break;
        default : 
             printf("choix incorrect !\n");
