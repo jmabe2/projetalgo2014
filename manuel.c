@@ -108,7 +108,24 @@ int verifnumcompte (char* chaine)
 { 
 	return verifstrformat("BE## #### #### ####", chaine); 
 }  
-//Patrick  
+//Patrick 
+structclientAcopy (struct clientA source,struct clientA *destination)
+{
+	destination->numero = source.numero;
+	stringcopy(source.nom, destination->nom);
+	stringcopy(source.prenom, destination->prenom);
+	stringcopy(source.datenaiss, destination->datenaiss);
+	stringcopy(source.num_compte, destination->num_compte);
+	stringcopy(source.num_reg_nat, destination->num_reg_nat);
+}
+
+structclientBcopy (struct clientB source,struct clientB *destination)
+{
+	stringcopy(source.nom, destination->nom);
+	stringcopy(source.prenom, destination->prenom);
+	stringcopy(source.datenaiss, destination->datenaiss);
+
+}
 //Fonction modifer par Manuel
 int verifnom(char* chaine)
 {
