@@ -478,42 +478,27 @@ int getsPerso(char *destination,int size,char *fonctionverif)
  while(lettre!='\n');
  if(fonctionverif=="verifnom"&&verifnom(temp)==1)
  {
-   for(i=0;i<size;i++)
-   {
-    destination[i] = temp[i];
-   }
+   stringcopy(temp,destination);
    return 1;
  }
  else if(fonctionverif=="verifprenom"&&verifprenom(temp)==1)
  {
-   for(i=0;i<size;i++)
-   {
-    destination[i] = temp[i];
-   }
+   stringcopy(temp,destination);
    return 1;
  }
  else if(fonctionverif=="verifdatenaiss"&&verifdatenaiss(temp)==1)
  {
-    for(i=0;i<size;i++)
-   {
-    destination[i] = temp[i];
-   }
+   stringcopy(temp,destination);
    return 1;
  }
  else if(fonctionverif=="verifnumcompte"&&verifnumcompte(temp)==1)
  {
-   for(i=0;i<size;i++)
-   {
-    destination[i] = temp[i];
-   }
-  return 1;
+   stringcopy(temp,destination);
+   return 1;
  }
  else if(fonctionverif=="verifnumregnat"&&verifnumregnat(temp)==1)
  {
-   for(i=0;i<size;i++)
-   {
-    destination[i] = temp[i];
-   }
+   stringcopy(temp,destination);
    return 1;
  }
  return 0;
