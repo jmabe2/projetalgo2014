@@ -311,39 +311,39 @@ int compatibildatenaissregnat(char *datenaiss,char *num_reg_nat)
 struct clientA encodenouvclientA()
 {
    int registreCorrect = 0,encoder = 0,i;
-   nouveauClientA.numero=0;
+   struct clientA nouveauclient;
    do
    {
      printf("Veuillez entre le num%cro de client : ",130);
      fflush(stdin);
-     scanf("%d",&nouveauClientA.numero);
-     if(nouveauClientA.numero<=0)
+     scanf("%d",&nouveauclient.numero);
+     if(nouveauclient.numero<=0)
      {
       printf("Num%cro client incorrect !\n",130);
      }
    }
-   while(nouveauClientA.numero<=0);
+   while(nouveauclient.numero<=0);
    do
    {
      printf("\n30 caract%cres maximum.",138);
      printf("\nVeuillez entrez le nom : ");
      fflush(stdin);
    }
-   while(getsPerso(nouveauClientA.nom,sizeof(nouveauClientA.nom),"verifnom")==0);
+   while(getsPerso(nouveauclient.nom,sizeof(nouveauclient.nom),"verifnom")==0);
    do
    {
      printf("\n30 caract%cres maximum.",138);
      printf("\nVeuillez entrez le pr%cnom : ",130);
      fflush(stdin);
    }
-   while(getsPerso(nouveauClientA.prenom,sizeof(nouveauClientA.prenom),"verifprenom")==0); 
+   while(getsPerso(nouveauclient.prenom,sizeof(nouveauclient.prenom),"verifprenom")==0); 
    do
    {
      printf("\n19 caract%cres maximum sous cette forme BEXX XXXX XXXX XXXX.",138);
      printf("\nVeuillez entrez le num%cro de compte : ",130);
      fflush(stdin);
    }
-   while(getsPerso(nouveauClientA.num_compte,sizeof(nouveauClientA.num_compte),"verifnumcompte")==0); 
+   while(getsPerso(nouveauclient.num_compte,sizeof(nouveauclient.num_compte),"verifnumcompte")==0); 
    while(registreCorrect==0)
    {
        do
@@ -352,15 +352,15 @@ struct clientA encodenouvclientA()
          printf("\nVeuillez entrez la date de naissance : ");
          fflush(stdin);
        }
-       while(getsPerso(nouveauClientA.datenaiss,sizeof(nouveauClientA.datenaiss),"verifdatenaiss")==0);
+       while(getsPerso(nouveauclient.datenaiss,sizeof(nouveauclient.datenaiss),"verifdatenaiss")==0);
        do
        {
          printf("\n13 caract%cres maximum sous cette forme XXXXXX-XXX-XX",138);
          printf("\nVeuillez entrez le num%cro de registre national : ",130);
          fflush(stdin);
        }
-       while(getsPerso(nouveauClientA.num_reg_nat,sizeof(nouveauClientA.num_reg_nat),"verifnumregnat")==0);
-       if(compatibildatenaissregnat(nouveauClientA.datenaiss,nouveauClientA.num_reg_nat)==1)
+       while(getsPerso(nouveauclient.num_reg_nat,sizeof(nouveauclient.num_reg_nat),"verifnumregnat")==0);
+       if(compatibildatenaissregnat(nouveauclient.datenaiss,nouveauclient.num_reg_nat)==1)
        {
           registreCorrect=1;                                                                                
        }
@@ -370,7 +370,7 @@ struct clientA encodenouvclientA()
      int choix =-1;
      system("cls");
      printf("Voici les informations concernant le client\n");
-     afficherClientA(nouveauClientA);
+     afficherClientA(nouveauclient);
      printf("\n\n");
      printf("0) Modifier le num%cro de client.\n",130);
      printf("1) Modifier le nom.\n");
@@ -388,13 +388,13 @@ struct clientA encodenouvclientA()
                   {
                      printf("Veuillez entre le num%cro de client : ",130);
                      fflush(stdin);
-                     scanf("%d",&nouveauClientA.numero);
-                     if(nouveauClientA.numero<=0)
+                     scanf("%d",&nouveauclient.numero);
+                     if(nouveauclient.numero<=0)
                      {
                       printf("Num%cro client incorrect !\n",130);
                      }
                   }
-                  while(nouveauClientA.numero==0);
+                  while(nouveauclient.numero==0);
                   break;
        case 1:   do
                  {
@@ -402,7 +402,7 @@ struct clientA encodenouvclientA()
                      printf("\nVeuillez entrez le nom : ");
                      fflush(stdin);
                  }
-                 while(getsPerso(nouveauClientA.nom,sizeof(nouveauClientA.nom),"verifnom")==0);
+                 while(getsPerso(nouveauclient.nom,sizeof(nouveauclient.nom),"verifnom")==0);
                  break;
        case 2: do
                {
@@ -410,7 +410,7 @@ struct clientA encodenouvclientA()
                  printf("\nVeuillez entrez le pr%cnom : ",130);
                  fflush(stdin);
                }
-               while(getsPerso(nouveauClientA.prenom,sizeof(nouveauClientA.prenom),"verifprenom")==0);
+               while(getsPerso(nouveauclient.prenom,sizeof(nouveauclient.prenom),"verifprenom")==0);
                break;
        case 3: registreCorrect = 0;
                while(registreCorrect==0)
@@ -421,15 +421,15 @@ struct clientA encodenouvclientA()
                          printf("\nVeuillez entrez la date de naissance : ");
                          fflush(stdin);
                        }
-                       while(getsPerso(nouveauClientA.datenaiss,sizeof(nouveauClientA.datenaiss),"verifdatenaiss")==0);
+                       while(getsPerso(nouveauclient.datenaiss,sizeof(nouveauclient.datenaiss),"verifdatenaiss")==0);
                        do
                        {
                          printf("\n13 caract%cres maximum sous cette forme XXXXXX-XXX-XX",138);
                          printf("\nVeuillez entrez le num%cro de registre national : ",130);
                          fflush(stdin);
                        }
-                       while(getsPerso(nouveauClientA.num_reg_nat,sizeof(nouveauClientA.num_reg_nat),"verifnumregnat")==0);
-                       if(compatibildatenaissregnat(nouveauClientA.datenaiss,nouveauClientA.num_reg_nat)==1)
+                       while(getsPerso(nouveauclient.num_reg_nat,sizeof(nouveauclient.num_reg_nat),"verifnumregnat")==0);
+                       if(compatibildatenaissregnat(nouveauclient.datenaiss,nouveauclient.num_reg_nat)==1)
                        {
                         registreCorrect=1;
                        }
@@ -441,13 +441,13 @@ struct clientA encodenouvclientA()
                  printf("\nVeuillez entrez le num%cro de compte : ",130);
                  fflush(stdin);
                }
-               while(getsPerso(nouveauClientA.num_compte,sizeof(nouveauClientA.num_compte),"verifnumcompte")==0); 
+               while(getsPerso(nouveauclient.num_compte,sizeof(nouveauclient.num_compte),"verifnumcompte")==0); 
             break;
        case 5: encoder=1;
             break;
      }
    }
-   return nouveauClientA;
+   return nouveauclient;
 }
 int getsPerso(char *destination,int size,char *fonctionverif)
 {
@@ -493,8 +493,8 @@ int getsPerso(char *destination,int size,char *fonctionverif)
  }
  else if(fonctionverif=="verifnumcompte"&&verifnumcompte(temp)==1)
  {
-   stringcopy(temp,destination);
-   return 1;
+  stringcopy(temp,destination);
+  return 1;
  }
  else if(fonctionverif=="verifnumregnat"&&verifnumregnat(temp)==1)
  {
@@ -513,6 +513,7 @@ void stringcopy (char* source, char* destination)
        i++; 
     } 
     while (source[i] != '\0');
+    destination[i] = '\0';
 } 
 //Fonction banqueA
 void banqueA()
