@@ -46,6 +46,8 @@ int verifnumcompte (char* chaine);
 int verifnom(char* chaine);
 //William
 void stringcopy (char* source, char* destination);
+void structclientAcopy (struct clientA source,struct clientA *destination);
+void structclientBcopy (struct clientB source,struct clientB *destination);
 
 //Fonction
 
@@ -109,7 +111,7 @@ int verifnumcompte (char* chaine)
 	return verifstrformat("BE## #### #### ####", chaine); 
 }  
 //Patrick 
-structclientAcopy (struct clientA source,struct clientA *destination)
+void structclientAcopy (struct clientA source,struct clientA *destination)
 {
 	destination->numero = source.numero;
 	stringcopy(source.nom, destination->nom);
@@ -119,7 +121,7 @@ structclientAcopy (struct clientA source,struct clientA *destination)
 	stringcopy(source.num_reg_nat, destination->num_reg_nat);
 }
 
-structclientBcopy (struct clientB source,struct clientB *destination)
+void structclientBcopy (struct clientB source,struct clientB *destination)
 {
 	stringcopy(source.nom, destination->nom);
 	stringcopy(source.prenom, destination->prenom);
@@ -147,41 +149,12 @@ int verifnom(char* chaine)
  }
  return 1;
 }
-//Ta fonction ne fonctionnait pas
-/*
-int verifnom(char* chaine) 
-{  
-  int i=0; 
-  int j=0; 
-while (chaine[i] !='\0' ) 
-{ 
-	 
-	if(chaine[0]==32)	 
-	{ 
-			j=1; 
-			break; 
-	} 
-	 
-	if (chaine[i]>65 || chaine[i]<90) 
-	{ 
-			j=0;
-            break;	 
-	} 		 
-	if (chaine[i]<65 && chaine[i]!=32|| chaine[i]>90 ) 
-	{  
-		j=1; 
-		break; 
-	} 
-	i++;		 
-}
-return printf("%d",j); 
-}
-*/
+
 //Manuel
 int verifdatenaiss(char *chaine)
 {
        int jour,mois,annee;
-       //On vÃ©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
+       //On vÃƒÂ©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
        int i;
     for(i=0;i<sizeof(nouveauClientA.datenaiss);i++)
     {
@@ -196,7 +169,7 @@ int verifdatenaiss(char *chaine)
          return 0;
        }
     }
-        //On converti chaque caractÃ¨res en entier en soutrayant avec le caractere 0 '0'.
+        //On converti chaque caractÃƒÂ¨res en entier en soutrayant avec le caractere 0 '0'.
         jour = ((chaine[0]-'0')*10)+chaine[1]-'0' ;
         mois = ((chaine[3]-'0')*10)+chaine[4]-'0';
         annee = ((chaine[6]-'0')*1000)+((chaine[7]-'0')*100)+((chaine[8]-'0')*10)+chaine[9]-'0';
@@ -479,7 +452,7 @@ struct clientA encodenouvclientA()
 int getsPerso(char *destination,int size,char *fonctionverif)
 {
  fflush(stdin);
- //Retourn 0 si le nombre de caractÃ¨res est dÃ©passÃ©
+ //Retourn 0 si le nombre de caractÃƒÂ¨res est dÃƒÂ©passÃƒÂ©
  int caracteres = 0,i;
  char lettre,temp[size];
  //Initialisation de la chaine temporaire
@@ -581,14 +554,15 @@ void banqueA()
     for(i=0;i<tailleSourceA;i++)
     {
       printf("Cient %d)\n",i+1);
-      //Patrick doit faire la fonction
-      //structclientAcopy(encodenouvclientA(),&sourceA[i]);
+      structclientAcopy(encodenouvclientA(),&sourceA[i]);
     }
     system("cls");
-    //Affichage des différents tableau de la banqueA
-    /*int choix;
-    trinom();
-    trinum();
+    //Affichage des diffÃ©rents tableau de la banqueA
+    int choix;
+    
+    //trinom();
+    //trinum();
+    /*
     while(choix!=0)
     {
      if(tailleSourceA<=1)
@@ -613,7 +587,8 @@ void banqueA()
      }
      else
      {
-         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possède plus de 1 client
+         
+         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃ¨de plus de 1 client
          printf("Afficher les clients                       1)\n");
          printf("Afficher les clients par nom               2)\n");
          printf("Afficher les clients par num%cro de client  3)\n",130);
@@ -639,10 +614,12 @@ void banqueA()
            }
      }
     }
-    //Debut de l'écriture des fichiers de la banqueA
+    
+    //Debut de l'Ã©criture des fichiers de la banqueA
      ecritureFichiersClientsA();
     //Debut de la lecture et affichage des fichiers de la banqueA
-     lectureFichierClientsA();*/
+     lectureFichierClientsA();
+     */
 }
 void banqueB()
 {
@@ -667,16 +644,16 @@ void banqueB()
     while(tailleSourceB>P||tailleSourceB<=0);
     //Debut de l'encodage de la banqueB
     system("cls");
-    /*for(i=0;i<tailleSourceB;i++)
+    for(i=0;i<tailleSourceB;i++)
     {
       printf("Cient %d)\n",i+1);
-      structclientBcopy(encodenouvclientB(),&sourceB[i]);
+      //structclientBcopy(encodenouvclientB(),&sourceB[i]);
     }
     //Affichage du tableau de la banqueB
-    afficherClientsB();
+    /*afficherClientsB();
     system("pause");
     system("cls");
-    //Debut de l'écriture du fichier de la banqueB
+    //Debut de l'Ã©criture du fichier de la banqueB
     ecrireFichier("banqueB","BanqueB.bin","");
     //Debut de la lecture et affichage du fichier de la banqueB
     if(lectureFichier("BanqueB.bin","banqueB","")==1)
@@ -686,7 +663,7 @@ void banqueB()
       system("pause");
       system("cls");
     }
-    //Recherche, affiche et écrit les client communs
+    //Recherche, affiche et Ã©crit les client communs
     clientsCommuns();
     system("pause");
     system("cls");*/
