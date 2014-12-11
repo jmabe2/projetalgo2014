@@ -38,7 +38,8 @@ int compatibildatenaissregnat(char *datenaiss,char *num_reg_nat);
 int getsPerso(char *destination,int size,char *fonctionverif);
 //Axel
 int stringcomp(char *chaineA,char *chaineB);
-int verifprenom(char *chaine); 
+int verifprenom(char *chaine);
+void trinom(); 
 //Jean-michel
 int verifnumregnat (char* chaine); 
 int verifstrformat (char* format, char* chaine);
@@ -53,35 +54,59 @@ void stringcopy (char* source, char* destination);
 //Fonction
 
 //Axel
-int stringcomp(char *chaineA,char *chaineB)//fonction de comparaison de 2 chaînes de caractères
+void trinom()
+{
+  int i,limite=tailleSourceA-1,pos,trier=0;
+  if(tailleSourceA >1)
+  {
+      while(trier==0)
+      {
+        trier = 1;
+        for(i=0;i<limite;i++)
+        {
+              if (stringcomp(trinomA[i].nom,trinomA[i+1].nom)==-1)
+              {
+                  struct clientA temp = trinomA[i];
+                  trinomA[i] = trinomA[i+1];
+                  trinomA[i+1] = temp;
+                  trier=0;
+                  pos=i;
+              }
+        }
+        limite=pos;
+      }
+  }
+}
+
+int stringcomp(char *chaineA,char *chaineB)//fonction de comparaison de 2 chaÃ®nes de caractÃ¨res
 /*
    La fonction renvoie la valeur 0 si les chaine A et B sont identiques.
-   La fonction renvoie la valeur 1 si la chaine A précède la chaine B dans l'ordre lexicographique.
-   La fonction renvoie la valeur -1 si la chaine A succède la chaine B dans l'ordre lexicographique.
+   La fonction renvoie la valeur 1 si la chaine A prÃ©cÃ¨de la chaine B dans l'ordre lexicographique.
+   La fonction renvoie la valeur -1 si la chaine A succÃ¨de la chaine B dans l'ordre lexicographique.
 */
 {
     int i=0;
-    while(chaineA[i]!='\0'&&chaineB[i]!='\0')//tant que l'on n'est pas arrivé au caractère de fin de chaîne dans la chaine A et dans la chaine B.
+    while(chaineA[i]!='\0'&&chaineB[i]!='\0')//tant que l'on n'est pas arrivÃ© au caractÃ¨re de fin de chaÃ®ne dans la chaine A et dans la chaine B.
     {
-        if((int)chaineA[i]<(int)chaineB[i])//si le caractère en cours de la chaine A précède le caractère en cours de la chaine B.
-            return 1; //on renvoie 1 car la chaine A précède la chaine B.
+        if((int)chaineA[i]<(int)chaineB[i])//si le caractÃ¨re en cours de la chaine A prÃ©cÃ¨de le caractÃ¨re en cours de la chaine B.
+            return 1; //on renvoie 1 car la chaine A prÃ©cÃ¨de la chaine B.
         else
         {
-            if((int)chaineA[i]>(int)chaineB[i])//si le caractère en cours de la chaine B précède le caractère en cours de la chaine A.
-                return -1;//on renvoie 1 car la chaine A succède la chaine B.
+            if((int)chaineA[i]>(int)chaineB[i])//si le caractÃ¨re en cours de la chaine B prÃ©cÃ¨de le caractÃ¨re en cours de la chaine A.
+                return -1;//on renvoie 1 car la chaine A succÃ¨de la chaine B.
             else
-                i++; //jusqu'à présent les caractères sont identique -> on passe au caractère suivant
+                i++; //jusqu'Ã  prÃ©sent les caractÃ¨res sont identique -> on passe au caractÃ¨re suivant
         }
     }
-    // on a quitté la boucle while car on est tombé sur une marque de fin de chaîne, soit dans la chaine A, soit dans la chaine B, soit dans les 2.
-    if(chaineA[i]==chaineB[i])//si les caractères sont identiques, alors il s'agit forcément de la marque de fin de chaîne
-        return 0;//on renvoie 0 car les 2 chaînes sont identiques
+    // on a quittÃ© la boucle while car on est tombÃ© sur une marque de fin de chaÃ®ne, soit dans la chaine A, soit dans la chaine B, soit dans les 2.
+    if(chaineA[i]==chaineB[i])//si les caractÃ¨res sont identiques, alors il s'agit forcÃ©ment de la marque de fin de chaÃ®ne
+        return 0;//on renvoie 0 car les 2 chaÃ®nes sont identiques
     else
     {
-        if(chaineA[i]=='\0')// on est arrivé à la fin de la chaine A mais pas à la fin de la chaine B -> la chaine A précède la chaine B.
+        if(chaineA[i]=='\0')// on est arrivÃ© Ã  la fin de la chaine A mais pas Ã  la fin de la chaine B -> la chaine A prÃ©cÃ¨de la chaine B.
             return 1;
         else
-            return -1; // sinon on est arrivé à la fin de la chaine B mais pas à la fin de la chaine A-> la chaine B précède la chaine A.
+            return -1; // sinon on est arrivÃ© Ã  la fin de la chaine B mais pas Ã  la fin de la chaine A-> la chaine B prÃ©cÃ¨de la chaine A.
     }
 }
 int verifprenom(char *chaine) 
@@ -142,6 +167,7 @@ int verifnumcompte (char* chaine)
 { 
 	return verifstrformat("BE## #### #### ####", chaine); 
 }  
+
 //Patrick 
 void structclientAcopy (struct clientA source,struct clientA *destination)
 {
@@ -186,7 +212,7 @@ int verifnom(char* chaine)
 int verifdatenaiss(char *chaine)
 {
        int jour,mois,annee;
-       //On vÃƒÂ©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
+       //On vÃƒÆ’Ã‚Â©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
        int i;
     for(i=0;i<sizeof(nouveauClientA.datenaiss);i++)
     {
@@ -201,7 +227,7 @@ int verifdatenaiss(char *chaine)
          return 0;
        }
     }
-        //On converti chaque caractÃƒÂ¨res en entier en soutrayant avec le caractere 0 '0'.
+        //On converti chaque caractÃƒÆ’Ã‚Â¨res en entier en soutrayant avec le caractere 0 '0'.
         jour = ((chaine[0]-'0')*10)+chaine[1]-'0' ;
         mois = ((chaine[3]-'0')*10)+chaine[4]-'0';
         annee = ((chaine[6]-'0')*1000)+((chaine[7]-'0')*100)+((chaine[8]-'0')*10)+chaine[9]-'0';
@@ -484,7 +510,7 @@ struct clientA encodenouvclientA()
 int getsPerso(char *destination,int size,char *fonctionverif)
 {
  fflush(stdin);
- //Retourn 0 si le nombre de caractÃƒÂ¨res est dÃƒÂ©passÃƒÂ©
+ //Retourn 0 si le nombre de caractÃƒÆ’Ã‚Â¨res est dÃƒÆ’Ã‚Â©passÃƒÆ’Ã‚Â©
  int caracteres = 0,i;
  char lettre,temp[size];
  //Initialisation de la chaine temporaire
@@ -577,10 +603,15 @@ void banqueA()
       structclientAcopy(sourceA[i],&trinumA[i]);
     }
     system("cls");
-    //Affichage des diffÃ©rents tableau de la banqueA
+    //Affichage des diffÃƒÂ©rents tableau de la banqueA
     int choix;
     
-    //trinom();
+    trinom();
+    for(i=0;i<tailleSourceA;i++)
+    {
+     printf("%s\n",trinomA[i].nom);
+    }
+    system("pause");
     //trinum();
     /*
     while(choix!=0)
@@ -608,7 +639,7 @@ void banqueA()
      else
      {
          
-         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃ¨de plus de 1 client
+         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃƒÂ¨de plus de 1 client
          printf("Afficher les clients                       1)\n");
          printf("Afficher les clients par nom               2)\n");
          printf("Afficher les clients par num%cro de client  3)\n",130);
@@ -635,7 +666,7 @@ void banqueA()
      }
     }
     
-    //Debut de l'Ã©criture des fichiers de la banqueA
+    //Debut de l'ÃƒÂ©criture des fichiers de la banqueA
      ecritureFichiersClientsA();
     //Debut de la lecture et affichage des fichiers de la banqueA
      lectureFichierClientsA();
@@ -673,7 +704,7 @@ void banqueB()
     /*afficherClientsB();
     system("pause");
     system("cls");
-    //Debut de l'Ã©criture du fichier de la banqueB
+    //Debut de l'ÃƒÂ©criture du fichier de la banqueB
     ecrireFichier("banqueB","BanqueB.bin","");
     //Debut de la lecture et affichage du fichier de la banqueB
     if(lectureFichier("BanqueB.bin","banqueB","")==1)
@@ -683,7 +714,7 @@ void banqueB()
       system("pause");
       system("cls");
     }
-    //Recherche, affiche et Ã©crit les client communs
+    //Recherche, affiche et ÃƒÂ©crit les client communs
     clientsCommuns();
     system("pause");
     system("cls");*/
