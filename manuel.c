@@ -44,10 +44,10 @@ int verifstrformat (char* format, char* chaine);
 int verifnumcompte (char* chaine);
 //Patrick
 int verifnom(char* chaine);
-//William
-void stringcopy (char* source, char* destination);
 void structclientAcopy (struct clientA source,struct clientA *destination);
 void structclientBcopy (struct clientB source,struct clientB *destination);
+//William
+void stringcopy (char* source, char* destination);
 
 //Fonction
 
