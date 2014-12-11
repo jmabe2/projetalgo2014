@@ -37,6 +37,7 @@ void afficherClientA(struct clientA source);
 int compatibildatenaissregnat(char *datenaiss,char *num_reg_nat);
 int getsPerso(char *destination,int size,char *fonctionverif);
 //Axel
+int stringcomp(char *chaineA,char *chaineB);
 int verifprenom(char *chaine); 
 //Jean-michel
 int verifnumregnat (char* chaine); 
@@ -52,6 +53,37 @@ void stringcopy (char* source, char* destination);
 //Fonction
 
 //Axel
+int stringcomp(char *chaineA,char *chaineB)//fonction de comparaison de 2 chaînes de caractères
+/*
+   La fonction renvoie la valeur 0 si les chaine A et B sont identiques.
+   La fonction renvoie la valeur 1 si la chaine A précède la chaine B dans l'ordre lexicographique.
+   La fonction renvoie la valeur -1 si la chaine A succède la chaine B dans l'ordre lexicographique.
+*/
+{
+    int i=0;
+    while(chaineA[i]!='\0'&&chaineB[i]!='\0')//tant que l'on n'est pas arrivé au caractère de fin de chaîne dans la chaine A et dans la chaine B.
+    {
+        if((int)chaineA[i]<(int)chaineB[i])//si le caractère en cours de la chaine A précède le caractère en cours de la chaine B.
+            return 1; //on renvoie 1 car la chaine A précède la chaine B.
+        else
+        {
+            if((int)chaineA[i]>(int)chaineB[i])//si le caractère en cours de la chaine B précède le caractère en cours de la chaine A.
+                return -1;//on renvoie 1 car la chaine A succède la chaine B.
+            else
+                i++; //jusqu'à présent les caractères sont identique -> on passe au caractère suivant
+        }
+    }
+    // on a quitté la boucle while car on est tombé sur une marque de fin de chaîne, soit dans la chaine A, soit dans la chaine B, soit dans les 2.
+    if(chaineA[i]==chaineB[i])//si les caractères sont identiques, alors il s'agit forcément de la marque de fin de chaîne
+        return 0;//on renvoie 0 car les 2 chaînes sont identiques
+    else
+    {
+        if(chaineA[i]=='\0')// on est arrivé à la fin de la chaine A mais pas à la fin de la chaine B -> la chaine A précède la chaine B.
+            return 1;
+        else
+            return -1; // sinon on est arrivé à la fin de la chaine B mais pas à la fin de la chaine A-> la chaine B précède la chaine A.
+    }
+}
 int verifprenom(char *chaine) 
 { 
 int i; 
@@ -541,6 +573,8 @@ void banqueA()
     {
       printf("Cient %d)\n",i+1);
       structclientAcopy(encodenouvclientA(),&sourceA[i]);
+      structclientAcopy(sourceA[i],&trinomA[i]);
+      structclientAcopy(sourceA[i],&trinumA[i]);
     }
     system("cls");
     //Affichage des diffÃ©rents tableau de la banqueA
