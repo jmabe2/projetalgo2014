@@ -2,8 +2,6 @@
 #include<stdio.h>
 #define M 4
 #define P 4
-#define N 10 /* N est le nombre maximum de noms de personne du tableau de noms de personne */
-#define LONGMAX 20 /* nombre de caractères maximum pour le nom d'une personne */
 
 //ClientA
 struct clientA
