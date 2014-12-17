@@ -164,6 +164,25 @@ ________________________________________________________________________________
 
 
 
+void afficherClientB(struct clientB *source)
+{
+int x=0;
+     
+ for(x=0;x<(longueurfenetre);x++)
+ {
+ printf("*");
+ }
+ 
+ printf("\nPrenom : %s\n",source->prenom);
+ printf("Nom : %s\n",source->nom);
+ printf("Date de naissance : %s\n",source->datenaiss);
+
+ for(x=0;x< (longueur fenetre);x++)
+ {
+ printf("*");
+ }
+ 
+}   
 
 
 
