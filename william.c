@@ -133,5 +133,41 @@ void MenuGeneral(void)
 }
 
 
+int GetChoix(void)
+{
+    int x,y;
+    char a;
+
+    x=35;
+    y=wherey();
+    gotoxy(x,y+3); printf("Votre choix : ");
+    x=wherex(); y=wherey();
+    do
+    {
+        gotoxy(x,y);clreol();gotoxy(x,y); scanf("%c", &a);
+    } while(a<'1' || a>'5');
+
+    return(a-'0');
+}
+
+
+
+void retourMenu(void)
+{
+    gotoxy(20,18);
+    printf("Vous allez etre redirige vers le menu principal");
+    Sleep(8000);
+    return;
+}
+________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
 
 
