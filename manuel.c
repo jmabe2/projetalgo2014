@@ -53,7 +53,18 @@ void structclientBcopy (struct clientB source,struct clientB *destination);
 void stringcopy (char* source, char* destination);
 
 //Fonction
-
+//William
+void stringcopy (char* source, char* destination) 
+{ 
+   int i = 0;
+   do 
+   { 
+       destination[i] = source[i]; 
+       i++; 
+    } 
+    while (source[i] != '\0');
+    destination[i] = '\0';
+} 
 //Axel
 void trinom()
 {
@@ -453,7 +464,7 @@ struct clientA encodenouvclientA()
                       printf("Num%cro client incorrect !\n",130);
                      }
                   }
-                  while(nouveauclient.numero==0);
+                  while(nouveauclient.numero<=0);
                   break;
        case 1:   do
                  {
@@ -562,18 +573,7 @@ int getsPerso(char *destination,int size,char *fonctionverif)
  }
  return 0;
 }
-//William
-void stringcopy (char* source, char* destination) 
-{ 
-   int i = 0;
-   do 
-   { 
-       destination[i] = source[i]; 
-       i++; 
-    } 
-    while (source[i] != '\0');
-    destination[i] = '\0';
-} 
+
 //Fonction banqueA
 void banqueA()
 {
