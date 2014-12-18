@@ -200,7 +200,43 @@ void AfficherClientsB()
  }
 }
 
+______________________________________________________________________
+attention nom des tableaux 
 
+void AfficherClientsA(char *nomtableau)
+{
+int x=0;
+
+printf("Liste des client de la banque A\n");
+
+ if(NomTableau=="")
+ {
+  for(x=0;x<tailleSourceA;x++)
+  {
+  printf("Informations sur le client %d)\n",x+1);//x+1 permet de commencer au client 1 meme si ses données correspondent au 0//
+  AfficherClientA(&sourceA[x]);
+  }
+ }
+
+ else if(NomTableau=="TriParNum")
+ {
+  for(x=0;x<tailleSourceA;x++)
+  {
+  printf("Informations sur le client %d)\n",x+1);
+  AfficherClientA(TriParNumA[x]);
+  }
+ }
+
+ else if(NomTableau=="TriParNom")
+ {
+  for(x=0;x<tailleSourceA;x++)
+  {
+  printf("Informations sur le client %d)\n",x+1);
+  AfficherClientA(TriParNomA[x]);
+  }
+ }
+ 
+}
 
 
 
