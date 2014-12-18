@@ -44,9 +44,6 @@ void ecrireFichierB(char *chemin_fichier,int tailleSourceB,struct clientA *sourc
 void lectureFichierB(char *chemin_fichier)
 {
 }
-void ecritureFichiersClientsA()
-{
-}
 
 //Manuel 
 int getsPerso(char *destination,int size,char *fonctionverif);
