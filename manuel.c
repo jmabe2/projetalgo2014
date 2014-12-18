@@ -34,8 +34,7 @@ struct clientB nouveauClientB;
 //Non faite
 
 struct clientB encodenouvclientB();
-void afficherClientB(struct clientB source);//Affichera un clientB
-void afficherClientsB();//Cette fonction s'occupera d'afficher les clients de la sourceB
+
 void clientsCommuns();/*Cette fonction verifie si un fichier clientA et clientB existe,
                        si il existe il recherche les clients communs aux 2 fichiers*/
 void afficherClientsA(char *nom_tableau);//Affichera un tableau de clients sourceA,trinomA ou trinumA
@@ -44,19 +43,13 @@ void ecrireFichier(char *chemin_fichier,char *nom_tableau);
 int lectureFichier(char *chemin_fichier,char *nom_tableau);/*Cette fonction renverra 1 
                                                       si le fichier a pu etre copier dans le tableau correspondant.*/
 void ecritureFichiersClientsA();/*Fera appel a la sous fonction ecrireFichier 
-                                  pour écrire les 3 fichiers sourceA,trinomA,trinumA*/
+                                  pour Ã©crire les 3 fichiers sourceA,trinomA,trinumA*/
 
 
 void lectureFichiersClientsA();/* lecture et affichage des fichiers sourceA,trinomA,trinumA,
                                 Cette fonction appellera la  fonction lectureFichier pour les trois tableaux */
 
 struct clientB encodenouvclientB()
-{
-}
-void afficherClientB(struct clientB source)
-{
-}
-void afficherClientsB()
 {
 }
 void clientsCommuns()
@@ -87,6 +80,7 @@ int verifdatenaiss(char *chaine);
 void afficherClientA(struct clientA *source);
 int compatibildatenaissregnat(char *datenaiss,char *num_reg_nat);
 int getsPerso(char *destination,int size,char *fonctionverif);
+void afficherClientsB();//Cette fonction s'occupera d'afficher les clients de la sourceB
 //Axel
 int stringcomp(char *chaineA,char *chaineB);
 int verifprenom(char *chaine);
@@ -100,10 +94,26 @@ int verifnom(char* chaine);
 void structclientAcopy (struct clientA source,struct clientA *destination);
 void structclientBcopy (struct clientB source,struct clientB *destination);
 //William
+void afficherClientB(struct clientB *source);
 void stringcopy (char* source, char* destination);
 
 //Fonction
 //William
+void afficherClientB(struct clientB *source)
+{
+    int x=0;
+    for(x=0;x<80;x++)
+    {
+      printf("*");
+    }
+    printf("\nPrenom : %s\n",source->prenom);
+    printf("Nom : %s\n",source->nom);
+    printf("Date de naissance : %s\n",source->datenaiss);
+    for(x=0;x<80;x++)
+    {
+      printf("*");
+    }
+} 
 void stringcopy (char* source, char* destination) 
 { 
    int i = 0;
@@ -140,35 +150,35 @@ void trinom()
   }
 }
 
-int stringcomp(char *chaineA,char *chaineB)//fonction de comparaison de 2 chaÃƒÂ®nes de caractÃƒÂ¨res
+int stringcomp(char *chaineA,char *chaineB)//fonction de comparaison de 2 chaÃƒÆ’Ã‚Â®nes de caractÃƒÆ’Ã‚Â¨res
 /*
    La fonction renvoie la valeur 0 si les chaine A et B sont identiques.
-   La fonction renvoie la valeur 1 si la chaine A prÃƒÂ©cÃƒÂ¨de la chaine B dans l'ordre lexicographique.
-   La fonction renvoie la valeur -1 si la chaine A succÃƒÂ¨de la chaine B dans l'ordre lexicographique.
+   La fonction renvoie la valeur 1 si la chaine A prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de la chaine B dans l'ordre lexicographique.
+   La fonction renvoie la valeur -1 si la chaine A succÃƒÆ’Ã‚Â¨de la chaine B dans l'ordre lexicographique.
 */
 {
     int i=0;
-    while(chaineA[i]!='\0'&&chaineB[i]!='\0')//tant que l'on n'est pas arrivÃƒÂ© au caractÃƒÂ¨re de fin de chaÃƒÂ®ne dans la chaine A et dans la chaine B.
+    while(chaineA[i]!='\0'&&chaineB[i]!='\0')//tant que l'on n'est pas arrivÃƒÆ’Ã‚Â© au caractÃƒÆ’Ã‚Â¨re de fin de chaÃƒÆ’Ã‚Â®ne dans la chaine A et dans la chaine B.
     {
-        if((int)chaineA[i]<(int)chaineB[i])//si le caractÃƒÂ¨re en cours de la chaine A prÃƒÂ©cÃƒÂ¨de le caractÃƒÂ¨re en cours de la chaine B.
-            return 1; //on renvoie 1 car la chaine A prÃƒÂ©cÃƒÂ¨de la chaine B.
+        if((int)chaineA[i]<(int)chaineB[i])//si le caractÃƒÆ’Ã‚Â¨re en cours de la chaine A prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de le caractÃƒÆ’Ã‚Â¨re en cours de la chaine B.
+            return 1; //on renvoie 1 car la chaine A prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de la chaine B.
         else
         {
-            if((int)chaineA[i]>(int)chaineB[i])//si le caractÃƒÂ¨re en cours de la chaine B prÃƒÂ©cÃƒÂ¨de le caractÃƒÂ¨re en cours de la chaine A.
-                return -1;//on renvoie 1 car la chaine A succÃƒÂ¨de la chaine B.
+            if((int)chaineA[i]>(int)chaineB[i])//si le caractÃƒÆ’Ã‚Â¨re en cours de la chaine B prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de le caractÃƒÆ’Ã‚Â¨re en cours de la chaine A.
+                return -1;//on renvoie 1 car la chaine A succÃƒÆ’Ã‚Â¨de la chaine B.
             else
-                i++; //jusqu'ÃƒÂ  prÃƒÂ©sent les caractÃƒÂ¨res sont identique -> on passe au caractÃƒÂ¨re suivant
+                i++; //jusqu'ÃƒÆ’Ã‚Â  prÃƒÆ’Ã‚Â©sent les caractÃƒÆ’Ã‚Â¨res sont identique -> on passe au caractÃƒÆ’Ã‚Â¨re suivant
         }
     }
-    // on a quittÃƒÂ© la boucle while car on est tombÃƒÂ© sur une marque de fin de chaÃƒÂ®ne, soit dans la chaine A, soit dans la chaine B, soit dans les 2.
-    if(chaineA[i]==chaineB[i])//si les caractÃƒÂ¨res sont identiques, alors il s'agit forcÃƒÂ©ment de la marque de fin de chaÃƒÂ®ne
-        return 0;//on renvoie 0 car les 2 chaÃƒÂ®nes sont identiques
+    // on a quittÃƒÆ’Ã‚Â© la boucle while car on est tombÃƒÆ’Ã‚Â© sur une marque de fin de chaÃƒÆ’Ã‚Â®ne, soit dans la chaine A, soit dans la chaine B, soit dans les 2.
+    if(chaineA[i]==chaineB[i])//si les caractÃƒÆ’Ã‚Â¨res sont identiques, alors il s'agit forcÃƒÆ’Ã‚Â©ment de la marque de fin de chaÃƒÆ’Ã‚Â®ne
+        return 0;//on renvoie 0 car les 2 chaÃƒÆ’Ã‚Â®nes sont identiques
     else
     {
-        if(chaineA[i]=='\0')// on est arrivÃƒÂ© ÃƒÂ  la fin de la chaine A mais pas ÃƒÂ  la fin de la chaine B -> la chaine A prÃƒÂ©cÃƒÂ¨de la chaine B.
+        if(chaineA[i]=='\0')// on est arrivÃƒÆ’Ã‚Â© ÃƒÆ’Ã‚Â  la fin de la chaine A mais pas ÃƒÆ’Ã‚Â  la fin de la chaine B -> la chaine A prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de la chaine B.
             return 1;
         else
-            return -1; // sinon on est arrivÃƒÂ© ÃƒÂ  la fin de la chaine B mais pas ÃƒÂ  la fin de la chaine A-> la chaine B prÃƒÂ©cÃƒÂ¨de la chaine A.
+            return -1; // sinon on est arrivÃƒÆ’Ã‚Â© ÃƒÆ’Ã‚Â  la fin de la chaine B mais pas ÃƒÆ’Ã‚Â  la fin de la chaine A-> la chaine B prÃƒÆ’Ã‚Â©cÃƒÆ’Ã‚Â¨de la chaine A.
     }
 }
 int verifprenom(char *chaine) 
@@ -249,6 +259,14 @@ void structclientBcopy (struct clientB source,struct clientB *destination)
 
 }
 //Fonction modifer par Manuel
+void afficherClientsB()
+{
+   int i ;
+   for(i=0;i<tailleSourceB;i++)
+   {
+     afficherClientB(&sourceB[i]);
+   }
+}
 int verifnom(char* chaine)
 {
  int i=0;
@@ -274,7 +292,7 @@ int verifnom(char* chaine)
 int verifdatenaiss(char *chaine)
 {
        int jour,mois,annee;
-       //On vÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
+       //On vÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©rifie si la date comporte un caractere autre qu'un chiffre ou le slash '/'.
        int i;
     for(i=0;i<sizeof(nouveauClientA.datenaiss);i++)
     {
@@ -289,7 +307,7 @@ int verifdatenaiss(char *chaine)
          return 0;
        }
     }
-        //On converti chaque caractÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨res en entier en soutrayant avec le caractere 0 '0'.
+        //On converti chaque caractÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨res en entier en soutrayant avec le caractere 0 '0'.
         jour = ((chaine[0]-'0')*10)+chaine[1]-'0' ;
         mois = ((chaine[3]-'0')*10)+chaine[4]-'0';
         annee = ((chaine[6]-'0')*1000)+((chaine[7]-'0')*100)+((chaine[8]-'0')*10)+chaine[9]-'0';
@@ -572,7 +590,7 @@ struct clientA encodenouvclientA()
 int getsPerso(char *destination,int size,char *fonctionverif)
 {
  fflush(stdin);
- //Retourn 0 si le nombre de caractÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨res est dÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©passÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©
+ //Retourn 0 si le nombre de caractÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨res est dÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©passÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©
  int caracteres = 0,i;
  char lettre,temp[size];
  //Initialisation de la chaine temporaire
@@ -654,7 +672,7 @@ void banqueA()
       structclientAcopy(sourceA[i],&trinumA[i]);
     }
     system("cls");
-    //Affichage des diffÃƒÆ’Ã‚Â©rents tableau de la banqueA
+    //Affichage des diffÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©rents tableau de la banqueA
     int choix;
     
     trinom();
@@ -685,7 +703,7 @@ void banqueA()
      else
      {
          
-         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃƒÆ’Ã‚Â¨de plus de 1 client
+         //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨de plus de 1 client
          printf("Afficher les clients                       1)\n");
          printf("Afficher les clients par nom               2)\n");
          printf("Afficher les clients par num%cro de client  3)\n",130);
@@ -712,7 +730,7 @@ void banqueA()
      }
     }
     
-    //Debut de l'ÃƒÆ’Ã‚Â©criture des fichiers de la banqueA
+    //Debut de l'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©criture des fichiers de la banqueA
      ecritureFichiersClientsA();
     //Debut de la lecture et affichage des fichiers de la banqueA
      lectureFichierClientsA();
@@ -747,10 +765,11 @@ void banqueB()
       structclientBcopy(encodenouvclientB(),&sourceB[i]);
     }
     //Affichage du tableau de la banqueB
-    /*afficherClientsB();
+    afficherClientsB();
     system("pause");
     system("cls");
-    //Debut de l'ÃƒÆ’Ã‚Â©criture du fichier de la banqueB
+    /*
+    //Debut de l'ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©criture du fichier de la banqueB
     ecrireFichier("BanqueB.bin","SourceB");
     //Debut de la lecture et affichage du fichier de la banqueB
     if(lectureFichier("BanqueB.bin","sourceB")==1)
@@ -760,7 +779,7 @@ void banqueB()
       system("pause");
       system("cls");
     }
-    //Recherche, affiche et ÃƒÆ’Ã‚Â©crit les client communs
+    //Recherche, affiche et ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©crit les client communs
     clientsCommuns();
     system("pause");
     system("cls");*/
