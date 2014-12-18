@@ -24,23 +24,11 @@ struct clientB
 //Non faite
 
 struct clientB encodenouvclientB();
-
 void clientsCommuns();/*Cette fonction verifie si un fichier clientA et clientB existe,
                        si il existe il recherche les clients communs aux 2 fichiers*/
 void trinum();
-void ecrireFichierA(char *chemin_fichier,struct clientA *sourceA);
-void ecrireFichierB(char *chemin_fichier,struct clientA *sourceB);
-int lectureFichierA(char *chemin_fichier);
-int lectureFichierB(char *chemin_fichier);
-int lectureFichier(char *chemin_fichier,char *nom_tableau);/*Cette fonction renverra 1 
-                                                      si le fichier a pu etre copier dans le tableau correspondant.*/
-void ecritureFichiersClientsA();/*Fera appel a la sous fonction ecrireFichier 
-                                  pour ÃƒÂ©crire les 3 fichiers sourceA,trinomA,trinumA*/
-
-
-void lectureFichiersClientsA();/* lecture et affichage des fichiers sourceA,trinomA,trinumA,
-                                Cette fonction appellera la  fonction lectureFichier pour les trois tableaux */
-
+void ecrireFichierB(char *chemin_fichier,int tailleSourceB,struct clientA *sourceB);
+void lectureFichierB(char *chemin_fichier);
 struct clientB encodenouvclientB()
 {
 }
@@ -50,19 +38,10 @@ void clientsCommuns()
 void trinum()
 {
 }
-void ecrireFichierA(char *chemin_fichier,struct clientA *sourceA)
+void ecrireFichierB(char *chemin_fichier,int tailleSourceB,struct clientA *sourceB)
 {
 }
-void ecrireFichierB(char *chemin_fichier,struct clientA *sourceB)
-{
-}
-int lectureFichierA(char *chemin_fichier)
-{
-}
-int lectureFichierB(char *chemin_fichier)
-{
-}
-void lectureFichiersClientsA()
+void lectureFichierB(char *chemin_fichier)
 {
 }
 void ecritureFichiersClientsA()
@@ -77,7 +56,9 @@ struct clientA encodenouvclientA();
 void banqueA(int tailleSourceA,struct clientA *sourceA,struct clientA *trinomA,struct clientA *trinumA);
 void banqueB(int tailleSourceB,struct clientB *sourceB);
 void afficherClientA(struct clientA *source);
-void afficherClientsB(int tailleSourceB,struct clientB *sourceB);//Cette fonction s'occupera d'afficher les clients de la sourceB
+void afficherClientsB(int tailleSourceB,struct clientB *sourceB);
+void ecrireFichierA(char *chemin_fichier,int tailleSourceA,struct clientA *sourceA);
+void lectureFichierA(char *chemin_fichier);
 //Axel
 int verifprenom(char *chaine);
 int stringcomp(char *chaineA,char *chaineB);
@@ -297,6 +278,41 @@ int verifnom(char* chaine)
 }
 
 //Manuel
+void lectureFichierA(char *chemin_fichier)
+{
+  FILE *fichier = NULL;
+  fichier = fopen(chemin_fichier,"r");
+  if(fichier == NULL)
+  {
+    printf("Ouverture impossible !\n");
+  }
+  else
+  {
+    fseek(fichier,0,SEEK_END);
+    int nbclients = ftell(fichier)/sizeof(clienta),i;
+    fseek(fichier,0,SEEK_SET);
+    struct clientA clients[nbclients];
+    fread(clients,sizeof(clienta),nbclients,fichier);
+    for(i=0;i<nbclients;i++)
+    {
+      afficherClientA(&clients[i]);
+    }
+  }
+}
+void ecrireFichierA(char *chemin_fichier,int tailleSourceA,struct clientA *source)
+{
+  FILE *fichier = NULL;
+  fichier = fopen(chemin_fichier,"wb+");
+  if(fichier == NULL)
+  {
+    printf("Ouverture impossible !\n");
+  }
+  else
+  {
+    fwrite(source,sizeof(clienta),tailleSourceA,fichier);
+    fclose(fichier);
+  }
+}
 int verifdatenaiss(char *chaine)
 {
        int jour,mois,annee;
@@ -737,10 +753,37 @@ void banqueA(int tailleSourceA,struct clientA *sourceA,struct clientA *trinomA,s
     }
     
     //Debut de l'ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©criture des fichiers de la banqueA
-     //ecritureFichiersClientsA();
+     ecrireFichierA("sourceA",tailleSourceA,sourceA);
+     ecrireFichierA("trinumA",tailleSourceA,trinumA);
+     ecrireFichierA("trinomA",tailleSourceA,trinomA);
     //Debut de la lecture et affichage des fichiers de la banqueA
-     //lectureFichierClientsA();
-     
+     choix =-1;
+     while(choix!=4)
+     {
+      printf("\nLire et afficher le fichier de la banque A sans tri.                      1)\n");
+      printf("Lire et afficher le fichier de la banque A avec tri par nom                 2)\n");
+      printf("Lire et afficher le fichier de la banque A avec tri par num%cro de client   3)\n",130);
+      printf("Continuer                                                                   4)\n");
+      printf("Votre choix : ");
+      fflush(stdin);
+      scanf("%d",&choix);
+      system("cls");
+      switch(choix)
+      {
+        case 1 : lectureFichierA("sourceA");
+             break;
+        case 2 : lectureFichierA("trinomA");
+             break;
+        case 3 :lectureFichierA("trinumA");
+             break;
+        case 4 : system("cls");
+             break;
+        default : printf("choix incorrect !\n");
+                  system("pause");
+                  system("cls");
+             break;
+      }
+     }
 }
 void banqueB(int tailleSourceB,struct clientB *sourceB)
 {
@@ -810,32 +853,46 @@ main()
             banqueA(tailleSourceA,sourceA,trinomA,trinumA); 
             banqueB(tailleSourceB,sourceB);
             break;
-       case 2 : /*
+       case 2 : 
             printf("Ordre de lecture des fichiers.\n");
             printf("1)Fichiers de la banqueA.\n");
             printf("2)Fichier de la banqueB.\n");
             printf("3)Fichier des clients communs.\n\n");
             system("pause");
             system("cls");
-            lectureFichiersClientsA();
-            if(lectureFichier("BanqueB.bin","sourceB")==1)
-            {
-              afficherClientsB();
-            }
+            choix =-1;
+             while(choix!=4)
+             {
+              printf("\n1)Lire et afficher le fichier de la banque A sans tri.\n");
+              printf("2)Lire et afficher le fichier de la banque A avec tri par nom.\n");
+              printf("3)Lire et afficher le fichier de la banque A avec tri par num%cro de client.\n",130);
+              printf("4)Continuer.\n");
+              printf("Votre choix : ");
+              fflush(stdin);
+              scanf("%d",&choix);
+              system("cls");
+              switch(choix)
+              {
+                case 1 : lectureFichierA("sourceA");
+                     break;
+                case 2 : lectureFichierA("trinomA");
+                     break;
+                case 3 :lectureFichierA("trinumA");
+                     break;
+                case 4 : system("cls");
+                     break;
+                default : printf("choix incorrect !\n");
+                          system("pause");
+                          system("cls");
+                     break;
+              }
+             }
+            lectureFichierB("sourceB");
             system("pause");
             system("cls");
-            if(lectureFichier("clients_communs.bin","clients_communs")==1)
-            {
-              printf("Voici les clients communs.\n");
-              int i;
-              for(i=0;i<tailleClientsCommuns;i++)
-              {
-               afficherClientB(clients_communs[i]);
-             }
-            }
+            lectureFichierB("clients_commun");
             system("pause");
-            system("cls");*/
-            printf("pas encore fait !");
+            system("cls");
             break;
        default : 
             printf("choix incorrect !\n");
