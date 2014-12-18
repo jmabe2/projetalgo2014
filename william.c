@@ -207,7 +207,7 @@ void AfficherClientsA(char *nomtableau)
 {
 int x=0;
 
-printf("Liste des client de la banque A\n");
+printf("Liste des clients de la banque A\n");
 
  if(NomTableau=="")
  {
