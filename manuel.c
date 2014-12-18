@@ -675,8 +675,6 @@ void banqueA()
     //Affichage des diffÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©rents tableau de la banqueA
     int choix;
     
-    trinom();
-    //trinum();
     /*
     while(choix!=0)
     {
@@ -699,11 +697,14 @@ void banqueA()
                   system("cls");
                break; 
        }
-     }
+     }*/
+     /*
      else
      {
          
          //Appel des fonctions trinom et trinum seulement si le tableau sourceA possÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¨de plus de 1 client
+         */trinom();/*
+         trinum();
          printf("Afficher les clients                       1)\n");
          printf("Afficher les clients par nom               2)\n");
          printf("Afficher les clients par num%cro de client  3)\n",130);
