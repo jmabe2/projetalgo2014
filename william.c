@@ -168,7 +168,7 @@ void afficherClientB(struct clientB *source)
 {
 int x=0;
      
- for(x=0;x<(longueurfenetre);x++)
+ for(x=0;x<80);x++)
  {
  printf("*");
  }
@@ -177,12 +177,29 @@ int x=0;
  printf("Nom : %s\n",source->nom);
  printf("Date de naissance : %s\n",source->datenaiss);
 
- for(x=0;x< (longueur fenetre);x++)
+ for(x=0;x<80;x++)
  {
  printf("*");
  }
  
 }   
+
+
+
+
+
+void AfficherClientsB()
+{
+ int x=0;
+ printf("Liste des clients de la banque B\n");
+ 
+ for(x=1;x<tailleSourceB;x++)
+ {
+ printf("Informations sur le client numero %d)\n",x);
+ AfficherClientB(&sourceB[x]);
+ }
+}
+
 
 
 
