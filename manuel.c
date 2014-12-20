@@ -236,7 +236,6 @@ void structclientAcopy (struct clientA source,struct clientA *destination)
 	stringcopy(source.num_compte, destination->num_compte);
 	stringcopy(source.num_reg_nat, destination->num_reg_nat);
 }
-
 void structclientBcopy (struct clientB source,struct clientB *destination)
 {
 	stringcopy(source.nom, destination->nom);
@@ -245,14 +244,6 @@ void structclientBcopy (struct clientB source,struct clientB *destination)
 
 }
 //Fonction modifer par Manuel
-void afficherClientsB(int tailleSourceB,struct clientB *sourceB)
-{
-   int i ;
-   for(i=0;i<tailleSourceB;i++)
-   {
-     afficherClientB(&sourceB[i]);
-   }
-}
 int verifnom(char* chaine)
 {
  int i=0;
@@ -275,6 +266,14 @@ int verifnom(char* chaine)
 }
 
 //Manuel
+void afficherClientsB(int tailleSourceB,struct clientB *sourceB)
+{
+   int i ;
+   for(i=0;i<tailleSourceB;i++)
+   {
+     afficherClientB(&sourceB[i]);
+   }
+}
 void lectureFichierA(char *chemin_fichier)
 {
   FILE *fichier = NULL;
@@ -435,7 +434,7 @@ void afficherClientA(struct clientA *source)
      {
       printf("*");
      }
-     printf("Num%cro de client : %d",130,source ->numero);  
+     printf("\nNum%cro de client : %d",130,source ->numero);  
      printf("\nNom : %s",source ->nom);
      printf("\nPr%cnom : %s",130,source ->prenom);
      printf("\nDate de naissance : %s",source->datenaiss);
