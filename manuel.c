@@ -41,7 +41,7 @@ struct clientB encodenouvclientB();
 void banqueA(struct clientA *sourceA,struct clientA *trinomA,struct clientA *trinumA);
 void banqueB(struct clientB *sourceB);
 void afficherClientA(struct clientA *source);
-void afficherClientsB(int tailleSourceB,struct clientB *sourceB);
+void afficherClientsB(int nbclient,struct clientB *sourceB);
 void ecrireFichierA(char *chemin_fichier,int nbclient,struct clientA *sourceA);
 void lectureFichierA(char *chemin_fichier);
 void ecrireFichierB(char *chemin_fichier,int nbclient,struct clientB *sourceB);
@@ -49,7 +49,7 @@ void lectureFichierB(char *chemin_fichier);
 //Axel
 int verifprenom(char *chaine);
 int stringcomp(char *chaineA,char *chaineB);
-void trinom(); 
+void trinom(int nbclient,struct clientA *trinomA); 
 //Jean-michel
 int verifnumregnat (char* chaine); 
 int verifnumcompte (char* chaine);
@@ -61,16 +61,16 @@ void structclientBcopy (struct clientB source,struct clientB *destination);
 //William
 void stringcopy (char* source, char* destination);
 void afficherClientB(struct clientB *source);
-void afficherClientsA(int tailleSourceA,struct clientA *source);
+void afficherClientsA(int nbclient,struct clientA *source);
 
 //Fonction
 //William
 //Modificer par Manuel :  j'ai modifier ta fonction, pour utiliser un pointeur a la place d'un nom de tableau car on n'utiliser plus de variables globales                
-void afficherClientsA(int tailleSourceA,struct clientA *source)
+void afficherClientsA(int nbclient,struct clientA *source)
 {
   int x=0;
   printf("Liste des clients de la banque A\n");
-  for(x=0;x<tailleSourceA;x++)
+  for(x=0;x<nbclient;x++)
   {
    printf("Informations sur le client %d)\n",x+1);//x+1 permet de commencer au client 1 meme si ses donnÃƒÂ©es correspondent au 0
    afficherClientA(&source[x]);
@@ -103,10 +103,10 @@ void stringcopy (char* source, char* destination)
     destination[i] = '\0';
 } 
 //Axel
-void trinom(int tailleSourceA,struct clientA *trinomA)
+void trinom(int nbclient,struct clientA *trinomA)
 {
-  int i,limite=tailleSourceA-1,pos,trier=0;
-  if(tailleSourceA >1)
+  int i,limite=nbclient-1,pos,trier=0;
+  if(nbclient >1)
   {
       while(trier==0)
       {
