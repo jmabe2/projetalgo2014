@@ -1026,7 +1026,7 @@ void rechercheClientsCommuns(struct clientB *clients_communs,int *tailleClientsC
     }
     else
     {
-    	if((fichierA=fopen("trinomA.dat","r"))!=NULL)
+    	if((fichierA=fopen("trinomA.dat","r"))!=NULL||(fichierA=fopen("sourceA.dat","r"))!=NULL||(fichierA=fopen("trinumA.dat","r"))!=NULL)
     	{
             fseek(fichierA,0,SEEK_END);
             int nbclientA = ftell(fichierA)/sizeof(struct clientA);
